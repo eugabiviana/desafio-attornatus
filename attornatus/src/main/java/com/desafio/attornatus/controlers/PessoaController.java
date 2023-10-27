@@ -42,4 +42,12 @@ public class PessoaController {
 
         return ResponseEntity.ok(pessoa);
     }
+    @PutMapping("/{id}")
+    public ResponseEntity update (@PathVariable UUID id, @RequestBody PessoaDTO updatedPessoa){
+        Optional<Pessoa> pessoaToUpdate = repository.findById(id);
+        var pessoa = pessoaToUpdate.get();
+        BeanUtils.copyProperties(updatedPessoa, pessoa);
+
+        return ResponseEntity.status(HttpStatus.OK).body(repository.save(pessoa));
+    }
 }
