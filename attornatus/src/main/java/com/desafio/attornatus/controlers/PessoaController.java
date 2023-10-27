@@ -1,7 +1,7 @@
 package com.desafio.attornatus.controlers;
 
 import com.desafio.attornatus.dtos.PessoaDTO;
-import com.desafio.attornatus.models.Pessoa;
+import com.desafio.attornatus.models.pessoa.Pessoa;
 import com.desafio.attornatus.repositories.PessoaRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
@@ -49,5 +49,12 @@ public class PessoaController {
         BeanUtils.copyProperties(updatedPessoa, pessoa);
 
         return ResponseEntity.status(HttpStatus.OK).body(repository.save(pessoa));
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity delete (@PathVariable UUID id){
+        Optional<Pessoa> pessoa = repository.findById(id);
+        repository.delete(pessoa.get());
+
+        return ResponseEntity.ok("O usuário foi deletado com sucesso!");
     }
 }

@@ -1,4 +1,4 @@
-package com.desafio.attornatus.models;
+package com.desafio.attornatus.models.pessoa;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
