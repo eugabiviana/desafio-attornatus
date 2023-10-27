@@ -53,4 +53,12 @@ public class EnderecoController {
 
         return ResponseEntity.status(HttpStatus.OK).body(repository.save(endereco));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity delete (@PathVariable UUID id){
+        Optional<Endereco> endereco = repository.findById(id);
+        repository.delete(endereco.get());
+
+        return ResponseEntity.ok("O endereço foi deletado com sucesso!");
+    }
 }
