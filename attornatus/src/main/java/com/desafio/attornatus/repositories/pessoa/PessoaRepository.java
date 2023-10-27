@@ -1,4 +1,4 @@
-package com.desafio.attornatus.repositories;
+package com.desafio.attornatus.repositories.pessoa;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

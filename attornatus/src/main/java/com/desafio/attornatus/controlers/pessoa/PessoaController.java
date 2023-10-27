@@ -1,8 +1,8 @@
-package com.desafio.attornatus.controlers;
+package com.desafio.attornatus.controlers.pessoa;
 
 import com.desafio.attornatus.dtos.pessoa.PessoaDTO;
 import com.desafio.attornatus.models.pessoa.Pessoa;
-import com.desafio.attornatus.repositories.PessoaRepository;
+import com.desafio.attornatus.repositories.pessoa.PessoaRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
