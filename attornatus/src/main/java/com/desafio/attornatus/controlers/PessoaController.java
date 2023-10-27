@@ -29,4 +29,17 @@ public class PessoaController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(pessoa);
     }
+
+    @GetMapping
+    public ResponseEntity getAll(){
+        List<Pessoa> pessoa = repository.findAll();
+        return ResponseEntity.ok(pessoa);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity findById(@PathVariable UUID id){
+        Optional<Pessoa> pessoa = repository.findById(id);
+
+        return ResponseEntity.ok(pessoa);
+    }
 }
