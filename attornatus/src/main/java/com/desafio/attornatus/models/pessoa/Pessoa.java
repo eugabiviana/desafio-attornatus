@@ -1,25 +1,39 @@
 package com.desafio.attornatus.models.pessoa;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.desafio.attornatus.models.endereco.Endereco;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
-import java.util.Date;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
-@Table(name = "db_pessoa")
+@Table(name = "tb_pessoa")
 public class Pessoa {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     @NotNull
     private String nome;
     @NotNull
     private Date dataNasc;
 
+    @ManyToMany
+    @JoinTable(
+            name = "tb_pessoa_endereco",
+            joinColumns = @JoinColumn(name = "pessoa_id"),
+            inverseJoinColumns = @JoinColumn(name = "endereco_id")
+    )
+    private Set<Endereco> enderecos = new HashSet<>();
+
+    public Pessoa() {
+
+    }
+    public Pessoa(UUID id, @NotNull String nome, @NotNull Date dataNasc) {
+        this.id = id;
+        this.nome = nome;
+        this.dataNasc = dataNasc;
+    }
 
     public UUID getId() {
         return id;
@@ -43,13 +57,6 @@ public class Pessoa {
 
     public void setDataNasc(Date dataNasc) {
         this.dataNasc = dataNasc;
-    }
-
-    public Pessoa() {
-
-    }
-    public Pessoa(UUID id) {
-        this.setId(UUID.randomUUID());
     }
 
     @Override
