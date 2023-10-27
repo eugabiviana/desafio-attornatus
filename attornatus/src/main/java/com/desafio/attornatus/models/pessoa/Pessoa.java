@@ -35,6 +35,13 @@ public class Pessoa {
         this.dataNasc = dataNasc;
     }
 
+    public Pessoa(UUID id, @NotNull String nome, @NotNull Date dataNasc, Set<Endereco> enderecos) {
+        this.id = id;
+        this.nome = nome;
+        this.dataNasc = dataNasc;
+        this.enderecos = enderecos;
+    }
+
     public UUID getId() {
         return id;
     }
