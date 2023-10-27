@@ -1,9 +1,7 @@
 package com.desafio.attornatus.controlers.endereco;
 
 import com.desafio.attornatus.dtos.endereco.EnderecoDTO;
-import com.desafio.attornatus.dtos.pessoa.PessoaDTO;
 import com.desafio.attornatus.models.endereco.Endereco;
-import com.desafio.attornatus.models.pessoa.Pessoa;
 import com.desafio.attornatus.repositories.endereco.EnderecoRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
