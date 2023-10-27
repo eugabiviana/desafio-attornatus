@@ -1,8 +1,11 @@
 package com.desafio.attornatus.repositories.endereco;
 
+import com.desafio.attornatus.models.endereco.Endereco;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.UUID;
+
 @Repository
-public interface EnderecoRepository extends JpaRepository {
+public interface EnderecoRepository extends JpaRepository<Endereco, UUID>{
 }

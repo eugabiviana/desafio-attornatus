@@ -3,6 +3,7 @@ package com.desafio.attornatus.models.endereco;
 import com.desafio.attornatus.models.pessoa.Pessoa;
 import jakarta.persistence.*;
 
+
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
