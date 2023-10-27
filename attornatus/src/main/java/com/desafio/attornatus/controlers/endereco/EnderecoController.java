@@ -1,7 +1,9 @@
 package com.desafio.attornatus.controlers.endereco;
 
 import com.desafio.attornatus.dtos.endereco.EnderecoDTO;
+import com.desafio.attornatus.dtos.pessoa.PessoaDTO;
 import com.desafio.attornatus.models.endereco.Endereco;
+import com.desafio.attornatus.models.pessoa.Pessoa;
 import com.desafio.attornatus.repositories.endereco.EnderecoRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
@@ -43,4 +45,12 @@ public class EnderecoController {
         return ResponseEntity.ok(endereco);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity update (@PathVariable UUID id, @RequestBody EnderecoDTO updatedEndereco){
+        Optional<Endereco> enderecoToUpdate = repository.findById(id);
+        var endereco = enderecoToUpdate.get();
+        BeanUtils.copyProperties(updatedEndereco, endereco);
+
+        return ResponseEntity.status(HttpStatus.OK).body(repository.save(endereco));
+    }
 }
