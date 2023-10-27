@@ -19,26 +19,6 @@ public class EnderecoDTO {
     @NotBlank
     private String cidade;
 
-    private List<PessoaDTO> pessoas = new ArrayList<>();
-
-    public EnderecoDTO() {
-    }
-
-    public EnderecoDTO(String logradouro, @NotNull String cep, @NotNull Integer numero, String cidade) {
-        this.logradouro = logradouro;
-        this.cep = cep;
-        this.numero = numero;
-        this.cidade = cidade;
-    }
-
-    public EnderecoDTO(Endereco endereco) {
-        this.logradouro = endereco.getLogradouro();
-        this.cep = endereco.getCep();
-        this.numero = endereco.getNumero();
-        this.cidade = endereco.getCidade();
-    }
-
-
     public String getLogradouro() {
         return logradouro;
     }
