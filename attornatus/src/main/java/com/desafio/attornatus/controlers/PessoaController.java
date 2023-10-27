@@ -1,6 +1,6 @@
 package com.desafio.attornatus.controlers;
 
-import com.desafio.attornatus.dtos.PessoaDTO;
+import com.desafio.attornatus.dtos.pessoa.PessoaDTO;
 import com.desafio.attornatus.models.pessoa.Pessoa;
 import com.desafio.attornatus.repositories.PessoaRepository;
 import jakarta.validation.Valid;

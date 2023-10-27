@@ -1,4 +1,4 @@
-package com.desafio.attornatus.dtos;
+package com.desafio.attornatus.dtos.pessoa;
 
 import jakarta.validation.constraints.NotNull;
 
