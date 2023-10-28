@@ -1,6 +1,7 @@
 package com.desafio.attornatus.controlers.pessoa;
 
 import com.desafio.attornatus.dtos.pessoa.PessoaDTO;
+import com.desafio.attornatus.models.endereco.Endereco;
 import com.desafio.attornatus.models.pessoa.Pessoa;
 import com.desafio.attornatus.repositories.pessoa.PessoaRepository;
 import jakarta.validation.Valid;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/cadastros")
@@ -24,7 +26,14 @@ public class PessoaController {
     @PostMapping
     public ResponseEntity<Pessoa> save(@RequestBody @Valid PessoaDTO pessoaDTO){
         var pessoa = new Pessoa();
-        BeanUtils.copyProperties(pessoaDTO, pessoa);
+        pessoa.setNome(pessoaDTO.getNome());
+        pessoa.setDataNasc(pessoaDTO.getDataNasc());
+//        var endereco = new Endereco();
+//        endereco.setCidade(pessoaDTO.getEnderecos().toArray()[0].);
+//        BeanUtils.copyProperties(pessoaDTO, pessoa);
+        var enderecos = pessoaDTO.getEnderecos().stream().map(e->new Endereco(null,e.getLogradouro(),e.getCep(),e.getNumero(),
+                e.getCidade(),null)).collect(Collectors.toSet());
+        pessoa.setEnderecos(enderecos);
         repository.save(pessoa);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(pessoa);

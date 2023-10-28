@@ -20,19 +20,21 @@ public class Endereco {
         private String cep;
         private Integer numero;
         private String cidade;
-        @ManyToMany(mappedBy = "enderecos")
-        private Set<Pessoa> pessoas = new HashSet<>();
+        @ManyToOne
+        @JoinColumn(name = "pessoa_id")
+        private Pessoa pessoa;
+//        private Set<Pessoa> pessoas = new HashSet<>();
 
     public Endereco() {
     }
 
-    public Endereco(UUID id, String logradouro, String cep, Integer numero, String cidade, Set<Pessoa> pessoas) {
+    public Endereco(UUID id, String logradouro, String cep, Integer numero, String cidade, Pessoa pessoa) {
         this.id = id;
         this.logradouro = logradouro;
         this.cep = cep;
         this.numero = numero;
         this.cidade = cidade;
-        this.pessoas = pessoas;
+        this.pessoa = pessoa;
     }
 
     public UUID getId() {
@@ -75,12 +77,12 @@ public class Endereco {
         this.cidade = cidade;
     }
 
-    public Set<Pessoa> getPessoas() {
-        return pessoas;
+    public Pessoa getPessoa() {
+        return pessoa;
     }
 
-    public void setPessoas(Set<Pessoa> pessoas) {
-        this.pessoas = pessoas;
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
 
     @Override

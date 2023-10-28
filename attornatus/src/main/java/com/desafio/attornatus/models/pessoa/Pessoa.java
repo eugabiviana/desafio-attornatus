@@ -18,21 +18,16 @@ public class Pessoa {
     @NotNull
     private Date dataNasc;
 
-    @ManyToMany
-    @JoinTable(
-            name = "tb_pessoa_endereco",
-            joinColumns = @JoinColumn(name = "pessoa_id"),
-            inverseJoinColumns = @JoinColumn(name = "endereco_id")
-    )
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pessoa")
+//    @JoinTable(
+//            name = "tb_pessoa_endereco",
+//            joinColumns = @JoinColumn(name = "pessoa_id"),
+//            inverseJoinColumns = @JoinColumn(name = "endereco_id")
+//    )
     private Set<Endereco> enderecos = new HashSet<>();
 
     public Pessoa() {
 
-    }
-    public Pessoa(UUID id, @NotNull String nome, @NotNull Date dataNasc) {
-        this.id = id;
-        this.nome = nome;
-        this.dataNasc = dataNasc;
     }
 
     public Pessoa(UUID id, @NotNull String nome, @NotNull Date dataNasc, Set<Endereco> enderecos) {
@@ -64,6 +59,14 @@ public class Pessoa {
 
     public void setDataNasc(Date dataNasc) {
         this.dataNasc = dataNasc;
+    }
+
+    public Set<Endereco> getEnderecos() {
+        return enderecos;
+    }
+
+    public void setEnderecos(Set<Endereco> enderecos) {
+        this.enderecos = new HashSet<>(enderecos);
     }
 
     @Override
