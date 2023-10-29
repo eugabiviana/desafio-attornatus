@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nome\" : \"José Antônio\", //OBRIGATÓRIO\n    \"dataNasc\" : \"2021-07-01\"//OBRIGATÓRIO\n\n}",
+							"raw": "{\n    \"nome\": \"José Antônio\", //OBRIGATÓRIO\n    \"dataNasc\": \"2021-07-01\", //OBRIGATÓRIO\n    \"enderecos\": [\n        {\n            \"logradouro\": \"Rua sem nome\", //OBRIGATÓRIO\n            \"cep\": 32185020,\n            \"numero\": 10, //OBRIGATÓRIO\n            \"cidade\": \"São Paulo\"\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
