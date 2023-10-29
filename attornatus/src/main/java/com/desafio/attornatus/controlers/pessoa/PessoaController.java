@@ -23,7 +23,7 @@ public class PessoaController {
     PessoaRepository repository;
 
     @PostMapping
-    public ResponseEntity<Pessoa> save(@RequestBody @Valid PessoaDTO pessoaDTO){
+    public ResponseEntity<Pessoa> salvar(@RequestBody @Valid PessoaDTO pessoaDTO){
         var pessoa = new Pessoa();
         pessoa.setNome(pessoaDTO.getNome());
         pessoa.setDataNasc(pessoaDTO.getDataNasc());
@@ -35,19 +35,19 @@ public class PessoaController {
     }
 
     @GetMapping
-    public ResponseEntity getAll(){
+    public ResponseEntity buscarTodos(){
         List<Pessoa> pessoa = repository.findAll();
         return ResponseEntity.ok(pessoa);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity findById(@PathVariable UUID id){
+    public ResponseEntity buscarPorId(@PathVariable UUID id){
         Optional<Pessoa> pessoa = repository.findById(id);
 
         return ResponseEntity.ok(pessoa);
     }
     @PutMapping("/{id}")
-    public ResponseEntity update (@PathVariable UUID id, @RequestBody PessoaDTO updatedPessoa){
+    public ResponseEntity atualizar (@PathVariable UUID id, @RequestBody PessoaDTO updatedPessoa){
         Optional<Pessoa> pessoaToUpdate = repository.findById(id);
         var pessoa = pessoaToUpdate.get();
         BeanUtils.copyProperties(updatedPessoa, pessoa);
@@ -55,7 +55,7 @@ public class PessoaController {
         return ResponseEntity.status(HttpStatus.OK).body(repository.save(pessoa));
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity delete (@PathVariable UUID id){
+    public ResponseEntity apagar (@PathVariable UUID id){
         Optional<Pessoa> pessoa = repository.findById(id);
         repository.delete(pessoa.get());
 
