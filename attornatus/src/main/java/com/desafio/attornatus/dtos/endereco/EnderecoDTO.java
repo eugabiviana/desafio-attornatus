@@ -4,11 +4,11 @@ import com.desafio.attornatus.dtos.pessoa.PessoaDTO;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.UUID;
 
 public class EnderecoDTO {
 
+    private UUID id;
     @NotBlank
     private String logradouro;
     @NotNull
@@ -18,6 +18,14 @@ public class EnderecoDTO {
     private PessoaDTO pessoa;
     @NotBlank
     private String cidade;
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
 
     public String getLogradouro() {
         return logradouro;

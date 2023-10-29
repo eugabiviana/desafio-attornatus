@@ -3,25 +3,32 @@ package com.desafio.attornatus.dtos.pessoa;
 import com.desafio.attornatus.dtos.endereco.EnderecoDTO;
 import jakarta.validation.constraints.NotNull;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class PessoaDTO {
 
+    private UUID id;
     @NotNull
     private String nome;
     @NotNull
     private Date dataNasc;
 
-    private Set<EnderecoDTO> enderecos = new HashSet<>();
+    private List<EnderecoDTO> enderecos;
 
-    public Set<EnderecoDTO> getEnderecos() {
+    public List<EnderecoDTO> getEnderecos() {
         return enderecos;
     }
 
-    public void setEnderecos(Set<EnderecoDTO> enderecos) {
-        this.enderecos = new HashSet<>(enderecos);
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public void setEnderecos(List<EnderecoDTO> enderecos) {
+        this.enderecos = enderecos;
     }
 
     public String getNome() {

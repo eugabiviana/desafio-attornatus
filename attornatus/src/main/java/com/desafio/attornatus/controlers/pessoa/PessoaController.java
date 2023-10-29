@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/cadastros")
@@ -28,15 +27,11 @@ public class PessoaController {
         var pessoa = new Pessoa();
         pessoa.setNome(pessoaDTO.getNome());
         pessoa.setDataNasc(pessoaDTO.getDataNasc());
-//        var endereco = new Endereco();
-//        endereco.setCidade(pessoaDTO.getEnderecos().toArray()[0].);
-//        BeanUtils.copyProperties(pessoaDTO, pessoa);
-        var enderecos = pessoaDTO.getEnderecos().stream().map(e->new Endereco(null,e.getLogradouro(),e.getCep(),e.getNumero(),
-                e.getCidade(),null)).collect(Collectors.toSet());
-        pessoa.setEnderecos(enderecos);
-        repository.save(pessoa);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(pessoa);
+        pessoaDTO.getEnderecos().forEach(ed -> pessoa.addEndereco(
+                new Endereco(ed.getLogradouro(), ed.getCep(), ed.getNumero(), ed.getCidade())));
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(pessoa));
     }
 
     @GetMapping

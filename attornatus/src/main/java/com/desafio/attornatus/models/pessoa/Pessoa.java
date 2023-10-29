@@ -1,6 +1,7 @@
 package com.desafio.attornatus.models.pessoa;
 
 import com.desafio.attornatus.models.endereco.Endereco;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
@@ -18,23 +19,12 @@ public class Pessoa {
     @NotNull
     private Date dataNasc;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pessoa")
-//    @JoinTable(
-//            name = "tb_pessoa_endereco",
-//            joinColumns = @JoinColumn(name = "pessoa_id"),
-//            inverseJoinColumns = @JoinColumn(name = "endereco_id")
-//    )
-    private Set<Endereco> enderecos = new HashSet<>();
+    @JsonManagedReference
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pessoa", orphanRemoval = true)
+    private List<Endereco> enderecos = new ArrayList<>();
 
     public Pessoa() {
 
-    }
-
-    public Pessoa(UUID id, @NotNull String nome, @NotNull Date dataNasc, Set<Endereco> enderecos) {
-        this.id = id;
-        this.nome = nome;
-        this.dataNasc = dataNasc;
-        this.enderecos = enderecos;
     }
 
     public UUID getId() {
@@ -61,12 +51,22 @@ public class Pessoa {
         this.dataNasc = dataNasc;
     }
 
-    public Set<Endereco> getEnderecos() {
+    public List<Endereco> getEnderecos() {
         return enderecos;
     }
 
-    public void setEnderecos(Set<Endereco> enderecos) {
-        this.enderecos = new HashSet<>(enderecos);
+    public void setEnderecos(List<Endereco> enderecos) {
+        this.enderecos = enderecos;
+    }
+
+    public void addEndereco(Endereco endereco) {
+        enderecos.add(endereco);
+        endereco.setPessoa(this);
+    }
+
+    public void remEndereco(Endereco endereco) {
+        enderecos.remove(endereco);
+        endereco.setPessoa(null);
     }
 
     @Override
@@ -88,5 +88,10 @@ public class Pessoa {
     @Override
     public int hashCode() {
         return Objects.hash(id, nome, dataNasc);
+    }
+
+    public void save(Set<Endereco> enderecos) {
+        var endereco = new Endereco();
+        enderecos.add(endereco);
     }
 }
